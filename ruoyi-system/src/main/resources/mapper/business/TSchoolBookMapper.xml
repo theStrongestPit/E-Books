@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.TSchoolBookMapper">
+    
+    <resultMap type="TSchoolBook" id="TSchoolBookResult">
+        <result property="id"    column="id"    />
+        <result property="needBook"    column="need_book"    />
+        <result property="bookVersion"    column="book_version"    />
+        <result property="press"    column="Press"    />
+        <result property="bookIsbn"    column="book_isbn"    />
+        <result property="number"    column="number"    />
+        <result property="schoolName"    column="school_name"    />
+        <result property="schoolContacts"    column="school_contacts"    />
+        <result property="schoolTel"    column="school_tel"    />
+        <result property="schoolId"    column="school_id"    />
+    </resultMap>
+
+    <sql id="selectTSchoolBookVo">
+        select id, need_book, book_version, Press, book_isbn, number, school_name, school_contacts, school_tel, school_id from t_school_book
+    </sql>
+
+    <select id="selectTSchoolBookList" parameterType="TSchoolBook" resultMap="TSchoolBookResult">
+        <include refid="selectTSchoolBookVo"/>
+        <where>  
+            <if test="needBook != null  and needBook != ''"> and need_book = #{needBook}</if>
+            <if test="bookVersion != null  and bookVersion != ''"> and book_version = #{bookVersion}</if>
+            <if test="press != null  and press != ''"> and Press = #{press}</if>
+            <if test="bookIsbn != null  and bookIsbn != ''"> and book_isbn like concat('%', #{bookIsbn}, '%')</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="schoolName != null  and schoolName != ''"> and school_name like concat('%', #{schoolName}, '%')</if>
+            <if test="schoolContacts != null  and schoolContacts != ''"> and school_contacts = #{schoolContacts}</if>
+            <if test="schoolTel != null  and schoolTel != ''"> and school_tel like concat('%', #{schoolTel}, '%') </if>
+            <if test="schoolId != null "> and school_id = #{schoolId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTSchoolBookById" parameterType="Long" resultMap="TSchoolBookResult">
+        <include refid="selectTSchoolBookVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTSchoolBook" parameterType="TSchoolBook" useGeneratedKeys="true" keyProperty="id">
+        insert into t_school_book
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="needBook != null  and needBook != ''">need_book,</if>
+            <if test="bookVersion != null  and bookVersion != ''">book_version,</if>
+            <if test="press != null  and press != ''">Press,</if>
+            <if test="bookIsbn != null  and bookIsbn != ''">book_isbn,</if>
+            <if test="number != null ">number,</if>
+            <if test="schoolName != null  and schoolName != ''">school_name,</if>
+            <if test="schoolContacts != null  and schoolContacts != ''">school_contacts,</if>
+            <if test="schoolTel != null  and schoolTel != ''">school_tel,</if>
+            <if test="schoolId != null ">school_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="needBook != null  and needBook != ''">#{needBook},</if>
+            <if test="bookVersion != null  and bookVersion != ''">#{bookVersion},</if>
+            <if test="press != null  and press != ''">#{press},</if>
+            <if test="bookIsbn != null  and bookIsbn != ''">#{bookIsbn},</if>
+            <if test="number != null ">#{number},</if>
+            <if test="schoolName != null  and schoolName != ''">#{schoolName},</if>
+            <if test="schoolContacts != null  and schoolContacts != ''">#{schoolContacts},</if>
+            <if test="schoolTel != null  and schoolTel != ''">#{schoolTel},</if>
+            <if test="schoolId != null ">#{schoolId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTSchoolBook" parameterType="TSchoolBook">
+        update t_school_book
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="needBook != null  and needBook != ''">need_book = #{needBook},</if>
+            <if test="bookVersion != null  and bookVersion != ''">book_version = #{bookVersion},</if>
+            <if test="press != null  and press != ''">Press = #{press},</if>
+            <if test="bookIsbn != null  and bookIsbn != ''">book_isbn = #{bookIsbn},</if>
+            <if test="number != null ">number = #{number},</if>
+            <if test="schoolName != null  and schoolName != ''">school_name = #{schoolName},</if>
+            <if test="schoolContacts != null  and schoolContacts != ''">school_contacts = #{schoolContacts},</if>
+            <if test="schoolTel != null  and schoolTel != ''">school_tel = #{schoolTel},</if>
+            <if test="schoolId != null ">school_id = #{schoolId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTSchoolBookById" parameterType="Long">
+        delete from t_school_book where id = #{id}
+    </delete>
+
+    <delete id="deleteTSchoolBookByIds" parameterType="String">
+        delete from t_school_book where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

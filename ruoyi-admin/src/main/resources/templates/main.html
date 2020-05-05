@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--360浏览器优先以webkit内核解析-->
+    <title>若依介绍</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+    <link href="../static/ajax/libs/layui/css/modules/laydate/default/layui.css" th:href="@{/ajax/libs/layui/css/modules/laydate/default/layui.css}" rel="stylesheet"/>
+    <style type="text/css">
+/*Bootstrap    轮播图左右按钮去阴影*/
+        .carousel-left {
+            background-image:none !important;
+            background-repeat: repeat-x;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+        }
+        .carousel-right {
+            left: auto;
+            right: 0;
+            background-image:none !important;
+            background-repeat: repeat-x;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+        }
+        .picture {
+            width: 100%;
+            height: 600px;
+            margin: 0px 5px 5px 6px;
+        }
+        .fl {
+            float: left;
+            width: 80%;
+        }
+        .fr {
+            width: 20%;
+            float: right;
+        }
+    </style>
+
+
+
+</head>
+
+<body class="gray-bg">
+<!--    <div class="row  border-bottom white-bg dashboard-header" style="width: 80%">-->
+    <div class="row" style="width:100%">
+        <div id="myCarousel" class="carousel slide fl" >
+            <!-- 轮播（Carousel）指标 -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+                <li data-target="#myCarousel" data-slide-to="4"></li>
+                <li data-target="#myCarousel" data-slide-to="5"></li>
+            </ol>
+            <!-- 轮播（Carousel）项目 -->
+            <div class="carousel-inner " style="height: 100%;">
+                <div class="item active picture">
+                    <a href="http://www.ahpu.edu.cn/" target="_blank">
+                        <img src="../static/img/ahpupic01.jpg" width="100%"  th:src="@{/img/ahpupic01.jpg}" alt="First slide">
+                    </a>
+                </div>
+                <div class="item picture">
+                    <a href="https://xiaoyuan.cycnet.com.cn/s?uid=716239&app_version=1.1.7&sid=402707&time=1560531357&signature=e6y30XlmbkL9oxwAjJd1PPgrEiKWzN1gMQE2nZKW8RNpvPrqzB&sign=084945c349ec045d18726ef0704680fe#" target="_blank">
+                        <img src="../static/img/activity01.jpg" width="100%" th:src="@{/img/activity01.jpg}" alt="Second slide" >
+                    </a>
+                </div>
+                <div class="item picture">
+                    <a href="http://gk.wh.cn/xxgkweb/blue/showView.jsp?unit=485124932&newid=1783106" target="_blank">
+                        <img src="../static/img/activity03.jpg" width="100%" th:src="@{/img/activity03.jpg}" alt="Third slide">
+                    </a>
+                </div>
+                <div class="item picture">
+                    <a href="https://mp.weixin.qq.com/s?__biz=MzAwNDE3NTM2NA==&mid=2650402454&idx=1&sn=24f49bed9e11eb508cc51fce16001a5b&chksm=8322adfdb45524ebec8b888056849ca93888754143601fba43872ca5e9b6eff38fa01a4ccfd8&mpshare=1&scene=23&srcid=#rd" target="_blank">
+                        <img src="../static/img/activity04.jpg" width="100%" th:src="@{/img/activity04.jpg}" alt="Fourth slide">
+                    </a>
+                </div>
+                <div class="item picture">
+                    <a href="http://tuanwei.ahpu.edu.cn/2019/0517/c538a118860/page.htm" target="_blank">
+                        <img src="../static/img/activity007.jpg" width="100%"  th:src="@{/img/activity007.jpg}" alt="Fifth slide">
+                    </a>
+                </div>
+                <div class="item picture">
+                    <a href="https://mp.weixin.qq.com/s?__biz=MzAwNDE3NTM2NA==&mid=2650402643&idx=1&sn=db8ce58d7869390c5c9847430270a83d&chksm=8322ac38b455252e355ff89a8aaec4541c4f4549eaba7f75dc081c5282ceafd1b53a07a4e4a0&mpshare=1&scene=23&srcid=#rd" target="_blank">
+                        <img src="../static/img/activity06.jpg" width="100%"  th:src="@{/img/activity06.jpg}" alt="Sixth slide">
+                    </a>
+                </div>
+            </div>
+            <!-- 轮播（Carousel）导航 -->
+            <a class="carousel-left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="fr" style="height: 600px" >
+            <div class="ibox-title">
+                <h2>E-Books项目介绍</h2>
+                <div class="ibox-content" style="height:600px">
+                    <p>&nbsp; &nbsp; &nbsp; &nbsp; E书团队致力于打造闲置图书“自主化A捐赠”线上公益平台。您根据个人待捐赠图书的类型，可在平台进行自主选择：“E书”捐书点、平台入驻的大学生志愿组织、图书匮乏地区贫困学校或不同年龄层不同社会身份的受益对象。本平台将完全按照您的意愿让所有相关信息传递到后台，从工作人员接收图书包裹到图书成功送达受益对象的整个过程，工作人员将在捐赠页面（平台网页）以物流跟踪的形式反馈给您，全过程双向化公开透明，让每一位捐书者清楚自己所捐图书的去向，让你们的爱心得到回应，让每一本闲置的图书最大化利用，为社会为未来，我们在路上！</p>
+                    <p>
+                        <b>当前版本：</b><span>v1.0.0</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        </div>
+    </div>
+</nav>
+        <div class="col-sm-3">
+            <h2>Hello,Guest</h2>
+            <small>移动设备访问请扫描以下二维码：</small>
+            <br>
+            <br>
+            <img th:src="@{/img/qr_code.png}" width="100%" style="max-width:264px;">
+            <br>
+        </div>
+        <div class="col-sm-5">
+            <h2>E-Books项目介绍</h2>
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; E书团队致力于打造闲置图书“自主化A捐赠”线上公益平台。您根据个人待捐赠图书的类型，可在平台进行自主选择：“E书”捐书点、平台入驻的大学生志愿组织、图书匮乏地区贫困学校或不同年龄层不同社会身份的受益对象。本平台将完全按照您的意愿让所有相关信息传递到后台，从工作人员接收图书包裹到图书成功送达受益对象的整个过程，工作人员将在捐赠页面（平台网页）以物流跟踪的形式反馈给您，全过程双向化公开透明，让每一位捐书者清楚自己所捐图书的去向，让你们的爱心得到回应，让每一本闲置的图书最大化利用，为社会为未来，我们在路上！</p>
+            <p>
+                <b>当前版本：</b><span>v1.0.0</span>
+            </p>
+            <p>
+                <span class="label label-warning">&yen;志愿服务</span>
+            </p>
+            <br>
+            <p>
+                <a class="btn btn-success btn-outline" href="https://gitee.com/y_project/RuoYi" target="_blank">
+                    <i class="fa fa-cloud"> </i> 待完善
+                </a>
+                <a class="btn btn-white btn-bitbucket" href="http://ruoyi.vip" target="_blank">
+                    <i class="fa fa-home"></i> 待完善
+                </a>
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <h4>技术选型：</h4>
+            <ol>
+                <li>核心框架：Spring Boot。</li>
+                <li>安全框架：Apache Shiro。</li>
+                <li>模板引擎：Thymeleaf。</li>
+                <li>持久层框架：MyBatis。</li>
+				<li>定时任务:Quartz。</li>
+                <li>数据库连接池：Druid。</li>
+                <li>工具类：Fastjson。</li>
+                <li>更多……</li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-4">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>联系信息</h5>
+
+                    </div>
+                    <div class="ibox-content">
+                        <p><i class="fa fa-send-o"></i> 官网：<a href="http://www.ruoyi.vip" target="_blank">http://www.ruoyi.vip</a>
+                        </p>
+                        <p><i class="fa fa-qq"></i> QQ群：<s>满1389287</s> <s>满1679294</s> <s>满1529866</s> <s>满1772718</s> <s>满1366522</s> <s>满1382251</s> <s>满1145125</s> <a href="https://jq.qq.com/?_wv=1027&k=5IdFWW8" target="_blank">86752435</a>
+                        </p>
+                        <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">/ *E-Books</a>
+                        </p>
+                        <p><i class="fa fa-credit-card"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *E-Books</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>捐赠</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="alert alert-warning">
+                            	一元捐助（点击图片放大）
+                        </div>
+                        <p id="pay-qrcode">
+                            <a href="javascript:;"><img th:src="@{/img/pay.png}" width="100%" alt="请使用手机支付宝或者微信扫码捐赠">
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/ajax/libs/layui/layui.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script src="../static/ajax/libs/layui/layui.js"></script>
+    <script type="text/javascript">
+	    $('#pay-qrcode').click(function(){
+	        var html=$(this).html();
+	        parent.layer.open({
+	            title: false,
+	            type: 1,
+	            closeBtn:false,
+	            shadeClose:true,
+	            area: ['600px', 'auto'],
+	            content: html
+	        });
+	    });
+
+        $(function(){
+            // 初始化轮播
+            $(".start-slide").click(function(){
+                $("#myCarousel").carousel('cycle');
+            });
+            // 停止轮播
+            $(".pause-slide").click(function(){
+                $("#myCarousel").carousel('pause');
+            });
+            // 循环轮播到上一个项目
+            $(".prev-slide").click(function(){
+                $("#myCarousel").carousel('prev');
+            });
+            // 循环轮播到下一个项目
+            $(".next-slide").click(function(){
+                $("#myCarousel").carousel('next');
+            });
+            // 循环轮播到某个特定的帧
+            $(".slide-one").click(function(){
+                $("#myCarousel").carousel(0);
+            });
+            $(".slide-two").click(function(){
+                $("#myCarousel").carousel(1);
+            });
+            $(".slide-three").click(function(){
+                $("#myCarousel").carousel(2);
+            });
+            $(".slide-four").click(function(){
+                $("#myCarousel").carousel(3);
+            });
+            $(".slide-five").click(function(){
+                $("#myCarousel").carousel(4);
+            });
+            $(".slide-six").click(function(){
+                $("#myCarousel").carousel(5);
+            });
+        });
+        layui.use('carousel', function () {
+            console.log(123)
+            var carousel = layui.carousel;
+            carousel.render({
+                elem: '#carousel',
+                width: '100%',
+                height: '700px',
+                arrow: 'always'
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.TDonationInfoMapper">
+    
+    <resultMap type="TDonationInfo" id="TDonationInfoResult">
+        <result property="id"    column="id"    />
+        <result property="bookName"    column="book_name"    />
+        <result property="isbn"    column="isbn"    />
+        <result property="version"    column="version"    />
+        <result property="bookNo"    column="book_no"    />
+        <result property="bookStatus"    column="book_status"    />
+        <result property="bookType"    column="book_type"    />
+        <result property="bookVersion"    column="book_version"    />
+        <result property="donator"    column="donator"    />
+        <result property="donatorId"    column="donator_id"    />
+        <result property="donatorTel"    column="donator_tel"    />
+        <result property="isDispense"    column="is_dispense"    />
+        <result property="finalSchool"    column="final_school"    />
+        <result property="express"    column="express"    />
+        <result property="expressNo"    column="express_no"    />
+        <result property="intentionSchool"    column="intention_school"    />
+        <result property="team"    column="team"    />
+        <result property="remark"    column="remark"    />
+        <result property="senddate"    column="senddate"    />
+        <result property="acceptdate"    column="acceptdate"    />
+    </resultMap>
+
+    <sql id="selectTDonationInfoVo">
+        select id, book_name, isbn, version, book_no, book_status, book_type, book_version, donator, donator_id, donator_tel, is_dispense, final_school, express, express_no, intention_school, team, remark, senddate, acceptdate from t_donation_info
+    </sql>
+
+    <select id="selectTDonationInfoList" parameterType="TDonationInfo" resultMap="TDonationInfoResult">
+        <include refid="selectTDonationInfoVo"/>
+        <where>  
+            <if test="bookName != null  and bookName != ''"> and book_name like concat('%', #{bookName}, '%')</if>
+            <if test="isbn != null  and isbn != ''"> and isbn like concat('%', #{isbn}, '%')</if>
+            <if test="version != null  and version != ''"> and version = #{version}</if>
+            <if test="bookNo != null  and bookNo != ''"> and book_no like concat('%', #{bookNo}, '%')</if>
+            <if test="bookStatus != null  and bookStatus != ''"> and book_status = #{bookStatus}</if>
+            <if test="bookType != null  and bookType != ''"> and book_type = #{bookType}</if>
+            <if test="bookVersion != null  and bookVersion != ''"> and book_version = #{bookVersion}</if>
+            <if test="donator != null  and donator != ''"> and donator = #{donator}</if>
+            <if test="donatorTel != null  and donatorTel != ''"> and donator_tel = #{donatorTel}</if>
+            <if test="isDispense != null  and isDispense != ''"> and is_dispense = #{isDispense}</if>
+            <if test="finalSchool != null  and finalSchool != ''"> and final_school = #{finalSchool}</if>
+            <if test="express != null  and express != ''"> and express = #{express}</if>
+            <if test="expressNo != null  and expressNo != ''"> and express_no like concat('%', #{expressNo}, '%')</if>
+            <if test="intentionSchool != null  and intentionSchool != ''"> and intention_school = #{intentionSchool}</if>
+            <if test="team != null  and team != ''"> and team = #{team}</if>
+            <if test="senddate != null "> and senddate = #{senddate}</if>
+            <if test="acceptdate != null "> and acceptdate = #{acceptdate}</if>
+        </where>
+    </select>
+    
+    <select id="selectTDonationInfoById" parameterType="Long" resultMap="TDonationInfoResult">
+        <include refid="selectTDonationInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTDonationInfo" parameterType="TDonationInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_donation_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bookName != null  and bookName != ''">book_name,</if>
+            <if test="isbn != null  and isbn != ''">isbn,</if>
+            <if test="version != null  and version != ''">version,</if>
+            <if test="bookNo != null  and bookNo != ''">book_no,</if>
+            <if test="bookStatus != null  and bookStatus != ''">book_status,</if>
+            <if test="bookType != null  and bookType != ''">book_type,</if>
+            <if test="bookVersion != null  and bookVersion != ''">book_version,</if>
+            <if test="donator != null  and donator != ''">donator,</if>
+            <if test="donatorId != null ">donator_id,</if>
+            <if test="donatorTel != null  and donatorTel != ''">donator_tel,</if>
+            <if test="isDispense != null  and isDispense != ''">is_dispense,</if>
+            <if test="finalSchool != null  and finalSchool != ''">final_school,</if>
+            <if test="express != null  and express != ''">express,</if>
+            <if test="expressNo != null  and expressNo != ''">express_no,</if>
+            <if test="intentionSchool != null  and intentionSchool != ''">intention_school,</if>
+            <if test="team != null  and team != ''">team,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="senddate != null ">senddate,</if>
+            <if test="acceptdate != null ">acceptdate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bookName != null  and bookName != ''">#{bookName},</if>
+            <if test="isbn != null  and isbn != ''">#{isbn},</if>
+            <if test="version != null  and version != ''">#{version},</if>
+            <if test="bookNo != null  and bookNo != ''">#{bookNo},</if>
+            <if test="bookStatus != null  and bookStatus != ''">#{bookStatus},</if>
+            <if test="bookType != null  and bookType != ''">#{bookType},</if>
+            <if test="bookVersion != null  and bookVersion != ''">#{bookVersion},</if>
+            <if test="donator != null  and donator != ''">#{donator},</if>
+            <if test="donatorId != null ">#{donatorId},</if>
+            <if test="donatorTel != null  and donatorTel != ''">#{donatorTel},</if>
+            <if test="isDispense != null  and isDispense != ''">#{isDispense},</if>
+            <if test="finalSchool != null  and finalSchool != ''">#{finalSchool},</if>
+            <if test="express != null  and express != ''">#{express},</if>
+            <if test="expressNo != null  and expressNo != ''">#{expressNo},</if>
+            <if test="intentionSchool != null  and intentionSchool != ''">#{intentionSchool},</if>
+            <if test="team != null  and team != ''">#{team},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="senddate != null ">#{senddate},</if>
+            <if test="acceptdate != null ">#{acceptdate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTDonationInfo" parameterType="TDonationInfo">
+        update t_donation_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bookName != null  and bookName != ''">book_name = #{bookName},</if>
+            <if test="isbn != null  and isbn != ''">isbn = #{isbn},</if>
+            <if test="version != null  and version != ''">version = #{version},</if>
+            <if test="bookNo != null  and bookNo != ''">book_no = #{bookNo},</if>
+            <if test="bookStatus != null  and bookStatus != ''">book_status = #{bookStatus},</if>
+            <if test="bookType != null  and bookType != ''">book_type = #{bookType},</if>
+            <if test="bookVersion != null  and bookVersion != ''">book_version = #{bookVersion},</if>
+            <if test="donator != null  and donator != ''">donator = #{donator},</if>
+            <if test="donatorId != null ">donator_id = #{donatorId},</if>
+            <if test="donatorTel != null  and donatorTel != ''">donator_tel = #{donatorTel},</if>
+            <if test="isDispense != null  and isDispense != ''">is_dispense = #{isDispense},</if>
+            <if test="finalSchool != null  and finalSchool != ''">final_school = #{finalSchool},</if>
+            <if test="express != null  and express != ''">express = #{express},</if>
+            <if test="expressNo != null  and expressNo != ''">express_no = #{expressNo},</if>
+            <if test="intentionSchool != null  and intentionSchool != ''">intention_school = #{intentionSchool},</if>
+            <if test="team != null  and team != ''">team = #{team},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="senddate != null ">senddate = #{senddate},</if>
+            <if test="acceptdate != null ">acceptdate = #{acceptdate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTDonationInfoById" parameterType="Long">
+        delete from t_donation_info where id = #{id}
+    </delete>
+
+    <delete id="deleteTDonationInfoByIds" parameterType="String">
+        delete from t_donation_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

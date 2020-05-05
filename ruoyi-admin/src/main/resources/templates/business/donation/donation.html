@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('捐助书籍列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>书籍名称：</p>
+                                <input type="text" name="bookName"/>
+                            </li>
+                            <li>
+                                <p>书籍isbn：</p>
+                                <input type="text" name="isbn"/>
+                            </li>
+                            <li>
+                                <p>版本：</p>
+                                <input type="text" name="version"/>
+                            </li>
+                            <li>
+                                <p>书籍编号：</p>
+                                <input type="text" name="bookNo"/>
+                            </li>
+                            <li>
+                                <p>书籍状态：</p>
+                                <select name="bookStatus" th:with="type=${@dict.getType('business_book_type')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>图书类型：</p>
+                                <select name="bookType" th:with="type=${@dict.getType('business_book_status')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>图书版本：</p>
+                                <input type="text" name="bookVersion"/>
+                            </li>
+                            <li>
+                                <p>捐赠者：</p>
+                                <input type="text" name="donator"/>
+                            </li>
+                            <li>
+                                <p>捐赠者电话：</p>
+                                <input type="text" name="donatorTel"/>
+                            </li>
+                            <li>
+                                <p>是否调剂：</p>
+                                <select name="isDispense" th:with="type=${@dict.getType('business_book_dispense')}">
+                                    <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>最终学校：</p>
+                                <input type="text" name="finalSchool"/>
+                            </li>
+                            <li>
+                                <p>快递公司：</p>
+                                <input type="text" name="express"/>
+                            </li>
+                            <li>
+                                <p>快递编号：</p>
+                                <input type="text" name="expressNo"/>
+                            </li>
+                            <li>
+                                <p>意向学校：</p>
+                                <input type="text" name="intentionSchool"/>
+                            </li>
+                            <li>
+                                <p>负责团队：</p>
+                                <input type="text" name="team"/>
+                            </li>
+                            <li class="select-time">
+                                <p>发送时间：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginSenddate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endSenddate]"/>
+                            </li>
+                            <li class="select-time">
+                                <p>接受时间：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginAcceptdate]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endAcceptdate]"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="business:donation:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="business:donation:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="business:donation:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="business:donation:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('business:donation:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('business:donation:remove')}]];
+        var prefix = ctx + "business/donation";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "捐助书籍",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'id', 
+                    title : '主键ID',
+                    visible: false
+                },
+                {
+                    field : 'bookName', 
+                    title : '书籍名称'
+                },
+                {
+                    field : 'isbn', 
+                    title : '书籍isbn'
+                },
+                {
+                    field : 'version', 
+                    title : '版本'
+                },
+                {
+                    field : 'bookNo', 
+                    title : '书籍编号'
+                },
+                {
+                    field : 'bookStatus', 
+                    title : '书籍状态'
+                },
+                {
+                    field : 'bookType', 
+                    title : '图书类型'
+                },
+                {
+                    field : 'bookVersion', 
+                    title : '图书版本'
+                },
+                {
+                    field : 'donator', 
+                    title : '捐赠者'
+                },
+                {
+                    field : 'donatorTel', 
+                    title : '捐赠者电话'
+                },
+                {
+                    field : 'isDispense', 
+                    title : '是否调剂'
+                },
+                {
+                    field : 'finalSchool', 
+                    title : '最终学校'
+                },
+                {
+                    field : 'express', 
+                    title : '快递公司'
+                },
+                {
+                    field : 'expressNo', 
+                    title : '快递编号'
+                },
+                {
+                    field : 'intentionSchool', 
+                    title : '意向学校'
+                },
+                {
+                    field : 'team', 
+                    title : '负责团队'
+                },
+                {
+                    field : 'remark', 
+                    title : '备注'
+                },
+                {
+                    field : 'senddate', 
+                    title : '发送时间'
+                },
+                {
+                    field : 'acceptdate', 
+                    title : '接受时间'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

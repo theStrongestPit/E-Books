@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.TBolgInfoMapper">
+    
+    <resultMap type="TBolgInfo" id="TBolgInfoResult">
+        <result property="id"    column="id"    />
+        <result property="blogTitel"    column="blog_titel"    />
+        <result property="blogContent"    column="blog_content"    />
+        <result property="authorId"    column="author_id"    />
+        <result property="userName"    column="userName"    />
+        <result property="releaseTime"    column="release_time"    />
+        <result property="browseTimes"    column="browse_times"    />
+        <result property="agreeNumber"    column="agree_number"    />
+        <result property="isRead"    column="is_read"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="vesion"    column="vesion"    />
+    </resultMap>
+
+    <sql id="selectTBolgInfoVo">
+        select id, blog_titel, blog_content, author_id, release_time, browse_times, agree_number, is_read, create_time, update_time, vesion from t_bolg_info
+    </sql>
+
+    <select id="selectTBolgInfoList" parameterType="TBolgInfo" resultMap="TBolgInfoResult">
+        <include refid="selectTBolgInfoVo"/>
+        <where>  
+            <if test="blogTitel != null  and blogTitel != ''"> and blog_titel = #{blogTitel}</if>
+            <if test="blogContent != null  and blogContent != ''"> and blog_content = #{blogContent}</if>
+            <if test="authorId != null "> and author_id = #{authorId}</if>
+            <if test="releaseTime != null "> and release_time = #{releaseTime}</if>
+            <if test="browseTimes != null "> and browse_times = #{browseTimes}</if>
+            <if test="agreeNumber != null "> and agree_number = #{agreeNumber}</if>
+            <if test="isRead != null  and isRead != ''"> and is_read = #{isRead}</if>
+            <if test="vesion != null "> and vesion = #{vesion}</if>
+        </where>
+    </select>
+
+
+    
+    <select id="selectTBolgInfoById" parameterType="Long" resultMap="TBolgInfoResult">
+        <include refid="selectTBolgInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTBolgInfo" parameterType="TBolgInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_bolg_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="blogTitel != null  and blogTitel != ''">blog_titel,</if>
+            <if test="blogContent != null  and blogContent != ''">blog_content,</if>
+            <if test="authorId != null ">author_id,</if>
+            <if test="releaseTime != null ">release_time,</if>
+            <if test="browseTimes != null ">browse_times,</if>
+            <if test="agreeNumber != null ">agree_number,</if>
+            <if test="isRead != null  and isRead != ''">is_read,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="vesion != null ">vesion,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="blogTitel != null  and blogTitel != ''">#{blogTitel},</if>
+            <if test="blogContent != null  and blogContent != ''">#{blogContent},</if>
+            <if test="authorId != null ">#{authorId},</if>
+            <if test="releaseTime != null ">#{releaseTime},</if>
+            <if test="browseTimes != null ">#{browseTimes},</if>
+            <if test="agreeNumber != null ">#{agreeNumber},</if>
+            <if test="isRead != null  and isRead != ''">#{isRead},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="vesion != null ">#{vesion},</if>
+         </trim>
+    </insert>
+
+
+    <insert id="insertAnnounce" parameterType="TBolgInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_bolg_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="blogTitel != null  and blogTitel != ''">blog_titel,</if>
+            <if test="blogContent != null  and blogContent != ''">blog_content,</if>
+            <if test="authorId != null ">author_id,</if>
+            <if test="releaseTime != null ">release_time,</if>
+            <if test="browseTimes != null ">browse_times,</if>
+            <if test="agreeNumber != null ">agree_number,</if>
+            <if test="isRead != null  and isRead != ''">is_read,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="vesion != null ">vesion,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="blogTitel != null  and blogTitel != ''">#{blogTitel},</if>
+            <if test="blogContent != null  and blogContent != ''">#{blogContent},</if>
+            <if test="authorId != null ">#{authorId},</if>
+            <if test="releaseTime != null ">#{releaseTime},</if>
+            <if test="browseTimes != null ">#{browseTimes},</if>
+            <if test="agreeNumber != null ">#{agreeNumber},</if>
+            <if test="isRead != null  and isRead != ''">#{isRead},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="vesion != null ">#{vesion},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTBolgInfo" parameterType="TBolgInfo">
+        update t_bolg_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="blogTitel != null  and blogTitel != ''">blog_titel = #{blogTitel},</if>
+            <if test="blogContent != null  and blogContent != ''">blog_content = #{blogContent},</if>
+            <if test="authorId != null ">author_id = #{authorId},</if>
+            <if test="releaseTime != null ">release_time = #{releaseTime},</if>
+            <if test="browseTimes != null ">browse_times = #{browseTimes},</if>
+            <if test="agreeNumber != null ">agree_number = #{agreeNumber},</if>
+            <if test="isRead != null  and isRead != ''">is_read = #{isRead},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="vesion != null ">vesion = #{vesion},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTBolgInfoById" parameterType="Long">
+        delete from t_bolg_info where id = #{id}
+    </delete>
+
+    <delete id="deleteTBolgInfoByIds" parameterType="String">
+        delete from t_bolg_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

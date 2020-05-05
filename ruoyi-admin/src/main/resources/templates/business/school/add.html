@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增受助学校')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-school-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">学校名：</label>
+                <div class="col-sm-8">
+                    <input name="schoolName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">学校详细地址：</label>
+                <div class="col-sm-8">
+                    <input name="schoolAddress" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">学校联系人：</label>
+                <div class="col-sm-8">
+                    <input name="schoolContacts" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系电话：</label>
+                <div class="col-sm-8">
+                    <input name="schoolTel" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">收件人：</label>
+                <div class="col-sm-8">
+                    <input name="addressee" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">收件人电话：</label>
+                <div class="col-sm-8">
+                    <input name="addresseeTel" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">学校邮政编码：</label>
+                <div class="col-sm-8">
+                    <input name="postalCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否审核：</label>
+                <div class="col-sm-8">
+                    <input name="isAudit" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "business/school"
+        $("#form-school-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-school-add').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

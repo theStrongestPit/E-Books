@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.TDonatedSchoolMapper">
+    
+    <resultMap type="TDonatedSchool" id="TDonatedSchoolResult">
+        <result property="id"    column="id"    />
+        <result property="schoolName"    column="school_name"    />
+        <result property="schoolAddress"    column="school_address"    />
+        <result property="schoolContacts"    column="school_contacts"    />
+        <result property="schoolTel"    column="school_tel"    />
+        <result property="addressee"    column="addressee"    />
+        <result property="addresseeTel"    column="addressee_tel"    />
+        <result property="postalCode"    column="postal_code"    />
+        <result property="isAudit"    column="is_audit"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTDonatedSchoolVo">
+        select id, school_name, school_address, school_contacts, school_tel, addressee, addressee_tel, postal_code, is_audit, remark from t_donated_school
+    </sql>
+
+    <select id="selectTDonatedSchoolList" parameterType="TDonatedSchool" resultMap="TDonatedSchoolResult">
+        <include refid="selectTDonatedSchoolVo"/>
+        <where>  
+            <if test="schoolName != null  and schoolName != ''"> and school_name like concat('%', #{schoolName}, '%')</if>
+            <if test="schoolAddress != null  and schoolAddress != ''"> and school_address = #{schoolAddress}</if>
+            <if test="schoolContacts != null  and schoolContacts != ''"> and school_contacts = #{schoolContacts}</if>
+            <if test="schoolTel != null  and schoolTel != ''"> and school_tel = #{schoolTel}</if>
+            <if test="addressee != null  and addressee != ''"> and addressee = #{addressee}</if>
+            <if test="addresseeTel != null  and addresseeTel != ''"> and addressee_tel = #{addresseeTel}</if>
+            <if test="postalCode != null  and postalCode != ''"> and postal_code = #{postalCode}</if>
+            <if test="isAudit != null  and isAudit != ''"> and is_audit = #{isAudit}</if>
+        </where>
+    </select>
+    
+    <select id="selectTDonatedSchoolById" parameterType="Long" resultMap="TDonatedSchoolResult">
+        <include refid="selectTDonatedSchoolVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTDonatedSchool" parameterType="TDonatedSchool" useGeneratedKeys="true" keyProperty="id">
+        insert into t_donated_school
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schoolName != null  and schoolName != ''">school_name,</if>
+            <if test="schoolAddress != null  and schoolAddress != ''">school_address,</if>
+            <if test="schoolContacts != null  and schoolContacts != ''">school_contacts,</if>
+            <if test="schoolTel != null  and schoolTel != ''">school_tel,</if>
+            <if test="addressee != null  and addressee != ''">addressee,</if>
+            <if test="addresseeTel != null  and addresseeTel != ''">addressee_tel,</if>
+            <if test="postalCode != null  and postalCode != ''">postal_code,</if>
+            <if test="isAudit != null  and isAudit != ''">is_audit,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="schoolName != null  and schoolName != ''">#{schoolName},</if>
+            <if test="schoolAddress != null  and schoolAddress != ''">#{schoolAddress},</if>
+            <if test="schoolContacts != null  and schoolContacts != ''">#{schoolContacts},</if>
+            <if test="schoolTel != null  and schoolTel != ''">#{schoolTel},</if>
+            <if test="addressee != null  and addressee != ''">#{addressee},</if>
+            <if test="addresseeTel != null  and addresseeTel != ''">#{addresseeTel},</if>
+            <if test="postalCode != null  and postalCode != ''">#{postalCode},</if>
+            <if test="isAudit != null  and isAudit != ''">#{isAudit},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTDonatedSchool" parameterType="TDonatedSchool">
+        update t_donated_school
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="schoolName != null  and schoolName != ''">school_name = #{schoolName},</if>
+            <if test="schoolAddress != null  and schoolAddress != ''">school_address = #{schoolAddress},</if>
+            <if test="schoolContacts != null  and schoolContacts != ''">school_contacts = #{schoolContacts},</if>
+            <if test="schoolTel != null  and schoolTel != ''">school_tel = #{schoolTel},</if>
+            <if test="addressee != null  and addressee != ''">addressee = #{addressee},</if>
+            <if test="addresseeTel != null  and addresseeTel != ''">addressee_tel = #{addresseeTel},</if>
+            <if test="postalCode != null  and postalCode != ''">postal_code = #{postalCode},</if>
+            <if test="isAudit != null  and isAudit != ''">is_audit = #{isAudit},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTDonatedSchoolById" parameterType="Long">
+        delete from t_donated_school where id = #{id}
+    </delete>
+
+    <delete id="deleteTDonatedSchoolByIds" parameterType="String">
+        delete from t_donated_school where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
